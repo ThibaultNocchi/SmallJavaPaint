@@ -2,6 +2,8 @@ package drawingeditor.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.Paint;
 
 public abstract class FormeImpl implements Forme {
@@ -13,10 +15,11 @@ public abstract class FormeImpl implements Forme {
     protected DoubleProperty heightProperty;
 
     public FormeImpl(double x, double y, double w, double h, Paint color){
-        this.setCouleur(color);
-        this.setPosition(x,y);
-        this.setWidth(w);
-        this.setHeight(h);
+        this.couleurProperty = new SimpleObjectProperty<>(color);
+        this.positionXProperty = new SimpleDoubleProperty(x);
+        this.positionYProperty = new SimpleDoubleProperty(y);
+        this.widthProperty = new SimpleDoubleProperty(w);
+        this.heightProperty = new SimpleDoubleProperty(h);
     }
 
     public Paint getCouleur(){
