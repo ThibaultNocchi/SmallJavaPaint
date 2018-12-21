@@ -1,5 +1,7 @@
 package drawingeditor.controller;
 
+import drawingeditor.model.Dessin;
+import drawingeditor.model.DessinImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
@@ -37,6 +39,8 @@ public class ControleurDessin implements Initializable {
     @FXML
     public Pane pane;
 
+    private Dessin dessin;
+
     public ControleurDessin(){};
 
     @Override
@@ -46,5 +50,6 @@ public class ControleurDessin implements Initializable {
         this.x.setVisible(false);
         this.y.setVisible(false);
         this.pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        this.dessin = new DessinImpl();
     }
 }
