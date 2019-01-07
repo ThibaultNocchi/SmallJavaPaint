@@ -5,6 +5,7 @@ import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -14,6 +15,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.net.URL;
 import java.util.List;
@@ -46,6 +50,25 @@ public class ControleurDessin implements Initializable {
 
     public ControleurDessin(){};
 
+    private Shape createViewShapeFromShape(final Forme forme){
+        if(forme instanceof Ell){
+            Ellipse ell = new Ellipse();
+            ell.setCenterX(forme.getPositionX());
+            ell.setCenterY(forme.getPositionY());
+            ell.setRadiusX(forme.getWidth()/2);
+            ell.setRadiusY(forme.getHeight()/2);
+            ell.setFill(forme.getCouleur());
+            return ell;
+        }else if(forme instanceof Rect){
+            Rectangle rect = new Rectangle(forme.getWidth(),forme.getHeight(),forme.getCouleur());
+            rect.setX(forme.getPositionX());
+            rect.setY(forme.getPositionY());
+            return rect;
+        }else{
+            return null;
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.rect.setSelected(true);
@@ -70,9 +93,18 @@ public class ControleurDessin implements Initializable {
                     if(event.wasAdded()){
                         // TODO
                         List<? extends Forme> liste = event.getAddedSubList();
+                        for(Forme forme : liste){
+                            Shape shape = createViewShapeFromShape(forme);
+                            pane.getChildren().add(shape);
+                        }
                     }else if(event.wasRemoved()){
                         // TODO
                         List<? extends Forme> liste = event.getRemoved();
+                        for(Forme forme : liste){
+                            for(Node affiche : pane.getChildren()){
+                                System.out.println(affiche);
+                            }
+                        }
                     }
                 }
             }
