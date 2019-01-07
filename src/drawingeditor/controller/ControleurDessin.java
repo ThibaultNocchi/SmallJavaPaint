@@ -29,32 +29,25 @@ import java.util.ResourceBundle;
 
 public class ControleurDessin implements Initializable {
 
-    @FXML
-    public ToggleButton rect;
-    @FXML
-    public ToggleButton ell;
-    @FXML
-    public ToggleButton del;
-    @FXML
-    public ToggleButton move;
-    @FXML
-    public ColorPicker colorpicker;
-    @FXML
-    public Label x;
-    @FXML
-    public Label y;
-    @FXML
-    public Spinner<Double> width;
-    @FXML
-    public Spinner<Double> height;
-    @FXML
-    public Pane pane;
+    @FXML public ToggleButton rect;
+    @FXML public ToggleButton ell;
+    @FXML public ToggleButton del;
+    @FXML public ToggleButton move;
+    @FXML public ColorPicker colorpicker;
+    @FXML public Label x;
+    @FXML public Label y;
+    @FXML public Spinner<Double> width;
+    @FXML public Spinner<Double> height;
+    @FXML public Pane pane;
 
     private Dessin dessin;
 
     public ControleurDessin(){};
 
     private Shape createViewShapeFromShape(final Forme forme){
+
+        Shape shape = null;
+
         if(forme instanceof Ell){
             Ellipse ell = new Ellipse();
             ell.centerXProperty().bind(forme.positionXProperty());
@@ -64,8 +57,7 @@ public class ControleurDessin implements Initializable {
             final NumberBinding heightBinding = Bindings.divide(forme.heightProperty(), 2);
             ell.radiusXProperty().bind(widthBinding);
             ell.radiusYProperty().bind(heightBinding);
-            ell.setUserData(forme);
-            return ell;
+            shape = ell;
         }else if(forme instanceof Rect){
             Rectangle rect = new Rectangle();
             rect.xProperty().bind(forme.positionXProperty());
@@ -73,11 +65,19 @@ public class ControleurDessin implements Initializable {
             rect.widthProperty().bind(forme.widthProperty());
             rect.heightProperty().bind(forme.heightProperty());
             rect.fillProperty().bind(forme.couleurProperty());
-            rect.setUserData(forme);
-            return rect;
-        }else{
-            return null;
+            shape = rect;
         }
+
+        shape.setUserData(forme);
+        shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(del.isSelected()) dessin.supprimerForme(forme);
+            }
+        });
+
+        return shape;
+        
     }
 
     @Override
@@ -112,9 +112,11 @@ public class ControleurDessin implements Initializable {
                         // TODO
                         List<? extends Forme> liste = event.getRemoved();
                         for(Forme forme : liste){
+                            Node toDelete = null;
                             for(Node affiche : pane.getChildren()){
-                                System.out.println(affiche);
+                                if(affiche.getUserData() == forme) toDelete = affiche;
                             }
+                            if(toDelete != null) pane.getChildren().remove(toDelete);
                         }
                     }
                 }
