@@ -1,10 +1,7 @@
 package drawingeditor.controller;
 
 import drawingeditor.model.*;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.binding.NumberBinding;
-import javafx.beans.binding.ObjectBinding;
+import javafx.beans.binding.*;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +20,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,6 +73,7 @@ public class ControleurDessin implements Initializable {
                 if(del.isSelected()) dessin.supprimerForme(forme);
             }
         });
+        new DnDToMoveShape(shape);
 
         return shape;
         
@@ -126,7 +125,46 @@ public class ControleurDessin implements Initializable {
     }
 
     private class DnDToMoveShape{
-        
+
+        private double pressPositionX;
+        private double pressPositionY;
+
+        public DnDToMoveShape(Shape view){
+
+            view.setOnMousePressed(evt -> {
+                if(move.isSelected()) {
+                    this.pressPositionX = evt.getSceneX();
+                    this.pressPositionY = evt.getSceneY();
+                    x.setVisible(true);
+                    y.setVisible(true);
+                    final StringExpression xBinding = Bindings.convert(((FormeImpl) view.getUserData()).positionXProperty());
+                    final StringExpression yBinding = Bindings.convert(((FormeImpl) view.getUserData()).positionYProperty());
+                    x.textProperty().bind(Bindings.createStringBinding(() -> "x: " + ((FormeImpl) view.getUserData()).positionXProperty().get(), ((FormeImpl) view.getUserData()).positionXProperty()));
+                    y.textProperty().bind(Bindings.createStringBinding(() -> "y: " + ((FormeImpl) view.getUserData()).positionYProperty().get(), ((FormeImpl) view.getUserData()).positionYProperty()));
+                }
+            });
+
+            view.setOnMouseDragged(evt -> {
+                if(move.isSelected()){
+                    final double tx = evt.getSceneX() - this.pressPositionX;
+                    final double ty = evt.getSceneY() - this.pressPositionY;
+                    ((FormeImpl) view.getUserData()).deplacer(tx,ty);
+                    this.pressPositionX = evt.getSceneX();
+                    this.pressPositionY = evt.getSceneY();
+                }
+            });
+
+            view.setOnMouseReleased(evt -> {
+                x.setVisible(false);
+                y.setVisible(false);
+                x.textProperty().unbind();
+                y.textProperty().unbind();
+                x.setText("");
+                y.setText("");
+            });
+
+        }
+
     }
 
 }
