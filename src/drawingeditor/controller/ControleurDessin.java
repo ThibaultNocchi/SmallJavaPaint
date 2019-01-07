@@ -64,6 +64,7 @@ public class ControleurDessin implements Initializable {
             final NumberBinding heightBinding = Bindings.divide(forme.heightProperty(), 2);
             ell.radiusXProperty().bind(widthBinding);
             ell.radiusYProperty().bind(heightBinding);
+            ell.setUserData(forme);
             return ell;
         }else if(forme instanceof Rect){
             Rectangle rect = new Rectangle();
@@ -72,6 +73,7 @@ public class ControleurDessin implements Initializable {
             rect.widthProperty().bind(forme.widthProperty());
             rect.heightProperty().bind(forme.heightProperty());
             rect.fillProperty().bind(forme.couleurProperty());
+            rect.setUserData(forme);
             return rect;
         }else{
             return null;
