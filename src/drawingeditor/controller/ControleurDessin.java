@@ -124,4 +124,9 @@ public class ControleurDessin implements Initializable {
         });
 
     }
+
+    private class DnDToMoveShape{
+        
+    }
+
 }

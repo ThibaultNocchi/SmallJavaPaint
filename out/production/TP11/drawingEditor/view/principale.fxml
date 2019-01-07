@@ -38,7 +38,7 @@
    <center>
       <ScrollPane prefHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="pane" prefHeight="1000.0" prefWidth="1000.0" />
          </content>
       </ScrollPane>
    </center>
