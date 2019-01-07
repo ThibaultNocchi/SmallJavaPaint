@@ -1,6 +1,10 @@
 package drawingeditor.controller;
 
 import drawingeditor.model.*;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.ObjectBinding;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -53,16 +57,21 @@ public class ControleurDessin implements Initializable {
     private Shape createViewShapeFromShape(final Forme forme){
         if(forme instanceof Ell){
             Ellipse ell = new Ellipse();
-            ell.setCenterX(forme.getPositionX());
-            ell.setCenterY(forme.getPositionY());
-            ell.setRadiusX(forme.getWidth()/2);
-            ell.setRadiusY(forme.getHeight()/2);
-            ell.setFill(forme.getCouleur());
+            ell.centerXProperty().bind(forme.positionXProperty());
+            ell.centerYProperty().bind(forme.positionYProperty());
+            ell.fillProperty().bind(forme.couleurProperty());
+            final NumberBinding widthBinding = Bindings.divide(forme.widthProperty(),2);
+            final NumberBinding heightBinding = Bindings.divide(forme.heightProperty(), 2);
+            ell.radiusXProperty().bind(widthBinding);
+            ell.radiusYProperty().bind(heightBinding);
             return ell;
         }else if(forme instanceof Rect){
-            Rectangle rect = new Rectangle(forme.getWidth(),forme.getHeight(),forme.getCouleur());
-            rect.setX(forme.getPositionX());
-            rect.setY(forme.getPositionY());
+            Rectangle rect = new Rectangle();
+            rect.xProperty().bind(forme.positionXProperty());
+            rect.yProperty().bind(forme.positionYProperty());
+            rect.widthProperty().bind(forme.widthProperty());
+            rect.heightProperty().bind(forme.heightProperty());
+            rect.fillProperty().bind(forme.couleurProperty());
             return rect;
         }else{
             return null;

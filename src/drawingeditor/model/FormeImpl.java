@@ -73,7 +73,7 @@ public abstract class FormeImpl implements Forme {
     }
 
     public DoubleProperty positionYProperty(){
-        return this.positionYProperty();
+        return this.positionYProperty;
     }
 
     public DoubleProperty widthProperty(){
