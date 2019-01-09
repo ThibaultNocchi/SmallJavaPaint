@@ -1,12 +1,12 @@
 package drawingeditor.model;
 
-public class MoveEvent implements FormeEvent {
+public class EventFormeMove implements EventForme {
 
     private double tx;
     private double ty;
     private Forme forme;
 
-    public MoveEvent(double tx, double ty, Forme forme){
+    public EventFormeMove(double tx, double ty, Forme forme){
         this.tx = tx;
         this.ty = ty;
         this.forme = forme;
@@ -15,6 +15,11 @@ public class MoveEvent implements FormeEvent {
     @Override
     public void rollback(Dessin model) {
         this.forme.deplacer(-(this.tx), -(this.ty));
+    }
+
+    @Override
+    public void rollforward(Dessin model) {
+        this.forme.deplacer(this.tx, this.ty);
     }
 
 }

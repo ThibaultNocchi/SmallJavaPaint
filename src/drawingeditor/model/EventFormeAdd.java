@@ -1,16 +1,21 @@
 package drawingeditor.model;
 
-public class AddEvent implements FormeEvent {
+public class EventFormeAdd implements EventForme {
 
     Forme forme;
 
-    public AddEvent(Forme addedForme){
+    public EventFormeAdd(Forme addedForme){
         this.forme = addedForme;
     }
 
     @Override
     public void rollback(Dessin model) {
         model.supprimerForme(this.forme);
+    }
+
+    @Override
+    public void rollforward(Dessin model) {
+        model.ajouterForme(this.forme);
     }
 
 }

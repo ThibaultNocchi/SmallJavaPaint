@@ -8,4 +8,12 @@ public class Rect extends FormeImpl {
         super(x,y,w,h,color);
     }
 
+    public String toString(){
+        String str = "Rectangle: x="+this.getPositionX();
+        str += " ; y="+this.getPositionY();
+        str += " ; w="+this.getWidth();
+        str += " ; h="+this.getHeight();
+        return str;
+    }
+
 }

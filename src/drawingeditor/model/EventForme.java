@@ -1,7 +1,8 @@
 package drawingeditor.model;
 
-public interface FormeEvent {
+public interface EventForme {
 
     public void rollback(Dessin model);
+    public void rollforward(Dessin model);
 
 }

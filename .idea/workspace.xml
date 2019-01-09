@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Thibault.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/AddEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/DeleteEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/EventList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/FormeEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/MoveEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/EventFormeAdd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/drawingeditor/model/EventFormeDelete.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TP11/drawingEditor/view/principale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP11/drawingEditor/view/principale.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/DrawingEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/DrawingEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/drawingeditor/controller/ControleurDessin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/controller/ControleurDessin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/AddEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/DeleteEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/Ell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/model/Ell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/EventList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/model/EventList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/FormeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/model/EventForme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/MoveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/model/EventFormeMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingeditor/model/Rect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/model/Rect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/drawingeditor/view/principale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingeditor/view/principale.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -67,7 +72,29 @@
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/drawingeditor/controller/ControleurDessin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="199">
+              <caret line="175" column="22" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2756#2757#0" expanded="true" />
+                <element signature="e#2827#2828#0" expanded="true" />
+                <element signature="e#4793#4794#0" expanded="true" />
+                <element signature="e#4862#4863#0" expanded="true" />
+                <element signature="e#5698#5699#0" expanded="true" />
+                <element signature="e#5772#5773#0" expanded="true" />
+                <element signature="e#6287#6288#0" expanded="true" />
+                <element signature="e#6329#6330#0" expanded="true" />
+                <element signature="e#6540#6541#0" expanded="true" />
+                <element signature="e#6586#6587#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingeditor/DrawingEditor.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,109 +109,48 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/controller/ControleurDessin.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="163" column="176" selection-start-line="163" selection-start-column="176" selection-end-line="163" selection-end-column="176" />
+            <state relative-caret-position="357">
+              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventFormeAdd.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="26" selection-start-column="26" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2561#2562#0" expanded="true" />
-                <element signature="e#2642#2643#0" expanded="true" />
-                <element signature="e#4778#4779#0" expanded="true" />
-                <element signature="e#4851#4852#0" expanded="true" />
-                <element signature="e#5788#5789#0" expanded="true" />
-                <element signature="e#5846#5847#0" expanded="true" />
+                <element signature="e#237#238#0" expanded="true" />
+                <element signature="e#285#286#0" expanded="true" />
+                <element signature="e#344#345#0" expanded="true" />
+                <element signature="e#390#391#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventList.java">
+        <entry file="file://$PROJECT_DIR$/src/drawingeditor/view/principale.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-              <folding>
-                <element signature="e#161#162#0" expanded="true" />
-                <element signature="e#210#211#0" expanded="true" />
-                <element signature="e#243#244#0" expanded="true" />
-                <element signature="e#284#285#0" expanded="true" />
-                <element signature="e#488#489#0" expanded="true" />
-                <element signature="e#507#508#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="765">
+              <caret line="45" column="35" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
             </state>
           </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
+            <state relative-caret-position="391">
+              <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
               <folding>
                 <element signature="e#217#218#0" expanded="true" />
-                <element signature="e#239#240#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Forme.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/FormeEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/AddEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-              <folding>
-                <element signature="e#132#133#0" expanded="true" />
-                <element signature="e#171#172#0" expanded="true" />
-                <element signature="e#227#228#0" expanded="true" />
-                <element signature="e#247#248#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/DeleteEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-              <folding>
-                <element signature="e#148#149#0" expanded="true" />
-                <element signature="e#189#190#0" expanded="true" />
-                <element signature="e#237#238#0" expanded="true" />
-                <element signature="e#257#258#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/MoveEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-              <folding>
-                <element signature="e#398#399#0" expanded="true" />
+                <element signature="e#281#282#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -228,26 +194,28 @@
         <option value="$PROJECT_DIR$/src/drawingEditor/DrawingEditor.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/view/principale.fxml" />
         <option value="$PROJECT_DIR$/src/drawingEditor/model/FormeImpl.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/DrawingEditor.java" />
         <option value="$PROJECT_DIR$/src/drawingeditor/model/Forme.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/model/Rect.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/model/Ell.java" />
         <option value="$PROJECT_DIR$/src/drawingeditor/model/FormeImpl.java" />
         <option value="$PROJECT_DIR$/src/drawingeditor/model/Dessin.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/view/principale.fxml" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/model/FormeEvent.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/model/AddEvent.java" />
-        <option value="$PROJECT_DIR$/src/drawingeditor/model/DeleteEvent.java" />
         <option value="$PROJECT_DIR$/fr_FR.dic" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/FormeEvent.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/DeleteEvent.java" />
         <option value="$PROJECT_DIR$/src/drawingeditor/model/MoveEvent.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/DrawingEditor.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/AddEvent.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/EventAdd.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/Ell.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/Rect.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/model/EventFormeAdd.java" />
         <option value="$PROJECT_DIR$/src/drawingeditor/model/EventList.java" />
+        <option value="$PROJECT_DIR$/src/drawingeditor/view/principale.fxml" />
         <option value="$PROJECT_DIR$/src/drawingeditor/controller/ControleurDessin.java" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="24" />
     <option name="width" value="1612" />
     <option name="height" value="876" />
@@ -265,7 +233,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -309,6 +276,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,7 +289,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547041511415" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547068634241" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/fr_FR.dic" />
     <property name="recentsLimit" value="5" />
@@ -465,18 +433,19 @@
       <workItem from="1545375481467" duration="2658000" />
       <workItem from="1545378195296" duration="4512000" />
       <workItem from="1546976472402" duration="388000" />
-      <workItem from="1546977742104" duration="9677000" />
+      <workItem from="1546977742104" duration="15360000" />
+      <workItem from="1547068792863" duration="1013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24503000" />
+    <option name="totallyTimeSpent" value="31199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.09541578" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.096481875" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -484,8 +453,8 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15057114" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32917964" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21079959" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -496,7 +465,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32917964" />
+      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="15" weight="0.3294979" />
       <window_info anchor="bottom" id="Docker" order="16" show_stripe_button="false" />
@@ -526,12 +495,12 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -547,26 +516,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Ell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="34" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Rect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/FormeImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="542">
           <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Dessin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fr_FR.dic">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-241111">
+          <caret line="33345" column="5" selection-start-line="33345" selection-start-column="1" selection-end-line="33345" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Forme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventForme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventFormeMove.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding>
+            <element signature="e#339#340#0" expanded="true" />
+            <element signature="e#398#399#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+            <element signature="e#494#495#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventFormeDelete.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+          <folding>
+            <element signature="e#237#238#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#342#343#0" expanded="true" />
+            <element signature="e#362#363#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Ell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Rect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventFormeAdd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
+          <folding>
+            <element signature="e#237#238#0" expanded="true" />
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/view/principale.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" column="35" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
+          <folding>
+            <element signature="e#217#218#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -583,116 +645,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Dessin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/view/principale.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/AddEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-          <folding>
-            <element signature="e#132#133#0" expanded="true" />
-            <element signature="e#171#172#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#247#248#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fr_FR.dic">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-241111">
-          <caret line="33345" column="5" selection-start-line="33345" selection-start-column="1" selection-end-line="33345" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/DeleteEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-          <folding>
-            <element signature="e#148#149#0" expanded="true" />
-            <element signature="e#189#190#0" expanded="true" />
-            <element signature="e#237#238#0" expanded="true" />
-            <element signature="e#257#258#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/MoveEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-          <folding>
-            <element signature="e#398#399#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/FormeEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/Forme.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/DessinImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
-          <folding>
-            <element signature="e#217#218#0" expanded="true" />
-            <element signature="e#239#240#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingeditor/model/EventList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-          <folding>
-            <element signature="e#161#162#0" expanded="true" />
-            <element signature="e#210#211#0" expanded="true" />
-            <element signature="e#243#244#0" expanded="true" />
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#507#508#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/drawingeditor/controller/ControleurDessin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="163" column="176" selection-start-line="163" selection-start-column="176" selection-end-line="163" selection-end-column="176" />
+        <state relative-caret-position="199">
+          <caret line="175" column="22" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2561#2562#0" expanded="true" />
-            <element signature="e#2642#2643#0" expanded="true" />
-            <element signature="e#4778#4779#0" expanded="true" />
-            <element signature="e#4851#4852#0" expanded="true" />
-            <element signature="e#5788#5789#0" expanded="true" />
-            <element signature="e#5846#5847#0" expanded="true" />
+            <element signature="e#2756#2757#0" expanded="true" />
+            <element signature="e#2827#2828#0" expanded="true" />
+            <element signature="e#4793#4794#0" expanded="true" />
+            <element signature="e#4862#4863#0" expanded="true" />
+            <element signature="e#5698#5699#0" expanded="true" />
+            <element signature="e#5772#5773#0" expanded="true" />
+            <element signature="e#6287#6288#0" expanded="true" />
+            <element signature="e#6329#6330#0" expanded="true" />
+            <element signature="e#6540#6541#0" expanded="true" />
+            <element signature="e#6586#6587#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -8,4 +8,12 @@ public class Ell extends FormeImpl {
         super(x, y, w, h, color);
     }
 
+    public String toString(){
+        String str = "Ellipse: x="+this.getPositionX();
+        str += " ; y="+this.getPositionY();
+        str += " ; w="+this.getWidth();
+        str += " ; h="+this.getHeight();
+        return str;
+    }
+
 }

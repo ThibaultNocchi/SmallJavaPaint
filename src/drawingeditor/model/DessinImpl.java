@@ -28,4 +28,12 @@ public class DessinImpl implements Dessin {
     public ObservableList<Forme> getFormes() {
         return this.liste;
     }
+
+    public String toString(){
+        String str = "Size: "+this.liste.size()+"\n";
+        for(Object forme : this.liste){
+            str += ((Forme) forme).toString()+"\n";
+        }
+        return str;
+    }
 }

@@ -9,21 +9,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,6 +38,10 @@ public class ControleurDessin implements Initializable {
     @FXML public Button clear;
     @FXML public ToggleButton draw;
     @FXML public Button back;
+    @FXML public Button forward;
+    @FXML public BorderPane borderPane;
+    @FXML public Button dessinInfos;
+    @FXML public ScrollPane scrollPane;
 
     private Dessin dessin;
     private EventList eventList;
@@ -87,18 +87,26 @@ public class ControleurDessin implements Initializable {
     private void addRectAtMouse(MouseEvent event){
         Rect rect = new Rect(event.getX(),event.getY(),this.width.getValueFactory().getValue(),this.height.getValueFactory().getValue(),this.colorpicker.getValue());
         this.dessin.ajouterForme(rect);
-        this.eventList.add(new AddEvent(rect));
+        this.eventList.add(new EventFormeAdd(rect));
     }
 
     private void addEllAtMouse(MouseEvent event){
         Ell ell = new Ell(event.getX(),event.getY(),this.width.getValueFactory().getValue(),this.height.getValueFactory().getValue(),this.colorpicker.getValue());
         this.dessin.ajouterForme(ell);
-        this.eventList.add(new AddEvent(ell));
+        this.eventList.add(new EventFormeAdd(ell));
     }
 
     private void removeForme(Forme forme){
         this.dessin.supprimerForme(forme);
-        this.eventList.add(new DeleteEvent(forme));
+        this.eventList.add(new EventFormeDelete(forme));
+    }
+
+    private void rollBack(){
+        this.eventList.rollback(this.dessin);
+    }
+
+    private void rollFoarward(){
+        this.eventList.rollforward(this.dessin);
     }
 
     @Override
@@ -111,6 +119,13 @@ public class ControleurDessin implements Initializable {
         this.pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));   // Colorie le fond en blanc.
         this.dessin = new DessinImpl();     // Initialise l'implémentation de notre "tableau".
         this.eventList = new EventList();   // Historique des modifications.
+
+        dessinInfos.setOnAction(new EventHandler<ActionEvent>() {   // Affiche la liste des éléments dans le dessin.
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println(dessin.toString());
+            }
+        });
 
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {     // Event qui gère lorsque l'on clique quelque part dans le pane.
             @Override
@@ -140,7 +155,27 @@ public class ControleurDessin implements Initializable {
         back.setOnAction(new EventHandler<ActionEvent>() {  // Demande un rollback au gestionnaire d'historique.
             @Override
             public void handle(ActionEvent event) {
-                eventList.rollback(dessin);
+                rollBack();
+            }
+        });
+
+        forward.setOnAction(new EventHandler<ActionEvent>() {   // Demande un retour en avant au gestionnaire d'historique.
+            @Override
+            public void handle(ActionEvent event) {
+                rollFoarward();
+            }
+        });
+
+        final KeyCombination keyCombinationZ = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+        final KeyCombination keyCombinationY = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+        borderPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(keyCombinationZ.match(event)){
+                    rollBack();
+                }else if(keyCombinationY.match(event)){
+                    rollFoarward();
+                }
             }
         });
 
@@ -215,7 +250,7 @@ public class ControleurDessin implements Initializable {
                     y.textProperty().unbind();
                     x.setText("");
                     y.setText("");
-                    eventList.add(new MoveEvent(this.txTotal, this.tyTotal, (FormeImpl) view.getUserData()));
+                    eventList.add(new EventFormeMove(this.txTotal, this.tyTotal, (FormeImpl) view.getUserData()));
                 }
             });
 

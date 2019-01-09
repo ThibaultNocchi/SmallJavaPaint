@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingeditor.controller.ControleurDessin">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingeditor.controller.ControleurDessin">
    <fx:define>
       <ToggleGroup fx:id="groupEditing" />
    </fx:define>
@@ -24,6 +24,7 @@
             <ToggleButton fx:id="draw" mnemonicParsing="false" text="draw" toggleGroup="$groupEditing" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <Button fx:id="back" mnemonicParsing="false" text="ctrl+z" />
+            <Button fx:id="forward" mnemonicParsing="false" text="ctrl+y" />
             <ToggleButton fx:id="del" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="del" toggleGroup="$groupEditing" />
             <Button fx:id="clear" mnemonicParsing="false" text="clr" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="4.0" />
@@ -36,11 +37,13 @@
             <Spinner fx:id="width" amountToStepBy="1.00" editable="true" initialValue="20.0" max="500.0" min="0.00" />
             <Label layoutX="353.0" layoutY="16.0" text="  height:" />
             <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="20.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" />
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
+            <Button fx:id="dessinInfos" mnemonicParsing="false" text="Infos" />
          </items>
       </ToolBar>
    </top>
    <center>
-      <ScrollPane prefHeight="900.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scrollPane" prefHeight="900.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <content>
             <Pane fx:id="pane" prefHeight="900.0" prefWidth="1280.0" />
          </content>
