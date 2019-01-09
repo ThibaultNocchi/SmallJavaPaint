@@ -21,7 +21,9 @@
          <items>
             <ToggleButton fx:id="rect" mnemonicParsing="false" text="rect" toggleGroup="$groupEditing" />
             <ToggleButton fx:id="ell" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="ell" toggleGroup="$groupEditing" />
+            <ToggleButton fx:id="draw" mnemonicParsing="false" text="draw" toggleGroup="$groupEditing" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
+            <Button fx:id="back" mnemonicParsing="false" text="ctrl+z" />
             <ToggleButton fx:id="del" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="del" toggleGroup="$groupEditing" />
             <Button fx:id="clear" mnemonicParsing="false" text="clr" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="4.0" />
@@ -31,16 +33,16 @@
             <Label text="" fx:id="x" />
             <Label fx:id="y" layoutX="345.0" layoutY="16.0" text="" />
             <Label text="  width:" />
-            <Spinner fx:id="width" amountToStepBy="1.00" editable="true" initialValue="100.0" max="500.0" min="0.00" />
+            <Spinner fx:id="width" amountToStepBy="1.00" editable="true" initialValue="20.0" max="500.0" min="0.00" />
             <Label layoutX="353.0" layoutY="16.0" text="  height:" />
-            <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="50.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" />
+            <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="20.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" />
          </items>
       </ToolBar>
    </top>
    <center>
-      <ScrollPane prefHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+      <ScrollPane prefHeight="900.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="pane" prefHeight="1000.0" prefWidth="1000.0" />
+            <Pane fx:id="pane" prefHeight="900.0" prefWidth="1280.0" />
          </content>
       </ScrollPane>
    </center>
