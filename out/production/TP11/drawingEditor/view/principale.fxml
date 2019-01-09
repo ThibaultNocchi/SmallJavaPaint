@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.ToggleGroup?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingeditor.controller.ControleurDessin">
    <fx:define>
@@ -22,16 +23,17 @@
             <ToggleButton fx:id="ell" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="ell" toggleGroup="$groupEditing" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <ToggleButton fx:id="del" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="del" toggleGroup="$groupEditing" />
-            <Separator layoutX="96.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
+            <Button fx:id="clear" mnemonicParsing="false" text="clr" />
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="4.0" />
             <ToggleButton fx:id="move" layoutX="230.0" layoutY="11.0" mnemonicParsing="false" text="move" toggleGroup="$groupEditing" />
             <Separator layoutX="148.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <ColorPicker fx:id="colorpicker" prefHeight="26.0" prefWidth="114.0" />
-            <Label fx:id="x" text="" />
+            <Label text="" fx:id="x" />
             <Label fx:id="y" layoutX="345.0" layoutY="16.0" text="" />
             <Label text="  width:" />
-            <Spinner fx:id="width" editable="true" amountToStepBy="1.00" min="0.00" max="500.0" initialValue="100.0" />
+            <Spinner fx:id="width" amountToStepBy="1.00" editable="true" initialValue="100.0" max="500.0" min="0.00" />
             <Label layoutX="353.0" layoutY="16.0" text="  height:" />
-            <Spinner fx:id="height" editable="true" layoutX="406.0" layoutY="11.0" amountToStepBy="1.00" min="0.00" max="500.0" initialValue="50.0" />
+            <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="50.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" />
          </items>
       </ToolBar>
    </top>

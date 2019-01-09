@@ -22,6 +22,9 @@ public class DessinImpl implements Dessin {
     }
 
     @Override
+    public void viderDessin() { this.liste.clear(); }
+
+    @Override
     public ObservableList<Forme> getFormes() {
         return this.liste;
     }

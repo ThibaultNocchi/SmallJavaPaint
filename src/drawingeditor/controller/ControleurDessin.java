@@ -3,14 +3,12 @@ package drawingeditor.controller;
 import drawingeditor.model.*;
 import javafx.beans.binding.*;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -37,6 +35,7 @@ public class ControleurDessin implements Initializable {
     @FXML public Spinner<Double> width;
     @FXML public Spinner<Double> height;
     @FXML public Pane pane;
+    @FXML public Button clear;
 
     private Dessin dessin;
 
@@ -81,18 +80,26 @@ public class ControleurDessin implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.rect.setSelected(true);
-        this.colorpicker.setValue(javafx.scene.paint.Color.RED);
-        this.x.setVisible(false);
+
+        this.rect.setSelected(true);    // Sélectionne par défaut l'outil pour dessiner des rectangles.
+        this.colorpicker.setValue(javafx.scene.paint.Color.RED);    // Sélectionne par défaut la couleur rouge.
+        this.x.setVisible(false);   // Cache le label des coordonnées X et Y pour quand on bouge une forme.
         this.y.setVisible(false);
-        this.pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-        this.dessin = new DessinImpl();
+        this.pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));   // Colorie le fond en blanc.
+        this.dessin = new DessinImpl();     // Initialise l'implémentation de notre "tableau".
 
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if(rect.isSelected()) dessin.ajouterForme(new Rect(event.getX(),event.getY(),width.getValueFactory().getValue(),height.getValueFactory().getValue(),colorpicker.getValue()));
                 else if(ell.isSelected()) dessin.ajouterForme(new Ell(event.getX(),event.getY(),width.getValueFactory().getValue(),height.getValueFactory().getValue(),colorpicker.getValue()));
+            }
+        });
+
+        clear.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dessin.viderDessin();
             }
         });
 
