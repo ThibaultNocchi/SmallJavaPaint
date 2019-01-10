@@ -51,6 +51,7 @@ public class ControleurDessin implements Initializable {
     private Dessin dessin;
     private EventList eventList;
     private int historyDrawing;
+    private double drawX, drawY;
 
     public ControleurDessin(){};
 
@@ -99,7 +100,11 @@ public class ControleurDessin implements Initializable {
     }
 
     private void addEllAtMouse(MouseEvent event){
-        Ell ell = new Ell(event.getX(),event.getY(),this.width.getValueFactory().getValue(),this.height.getValueFactory().getValue(),this.colorpicker.getValue());
+        this.addEllAtCoords(event.getX(), event.getY());
+    }
+
+    private void addEllAtCoords(double x, double y){
+        Ell ell = new Ell(x,y,this.width.getValueFactory().getValue(),this.height.getValueFactory().getValue(),this.colorpicker.getValue());
         this.dessin.ajouterForme(ell);
         EventFormeAdd ev = new EventFormeAdd(ell);
         if(this.draw.isSelected()) ev.setHistory(this.historyDrawing);
@@ -143,14 +148,38 @@ public class ControleurDessin implements Initializable {
         pane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(draw.isSelected()) historyDrawing = eventList.getLastHistory()+1;
+                if(draw.isSelected()){
+                    historyDrawing = eventList.getLastHistory()+1;
+                    drawX = event.getX();
+                    drawY = event.getY();
+                }
             }
         });
 
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {     // Event gérant un outil "crayon".
             @Override
             public void handle(MouseEvent event) {
-                if(draw.isSelected()) addEllAtMouse(event);
+//                if(draw.isSelected()) addEllAtMouse(event);
+                if(draw.isSelected()){
+                    double currentX = drawX;
+                    double currentY = drawY;
+                    double finalX = event.getX();
+                    double finalY = event.getY();
+                    drawX = finalX;
+                    drawY = finalY;
+                    double stepX = width.getValue() / 3;
+                    double stepY = height.getValue() / 3;
+                    while(currentX != finalX && currentY != finalY){
+                        addEllAtCoords(currentX, currentY);
+                        if(currentX <= finalX - stepX) currentX += stepX;
+                        else if(currentX >= finalX + stepX) currentX -= stepX;
+                        else currentX = finalX;
+                        if(currentY <= finalY - stepY) currentY += stepY;
+                        else if(currentY >= finalY + stepY) currentY -= stepY;
+                        else currentY = finalY;
+                    }
+                    addEllAtCoords(currentX, currentY);
+                }
             }
         });
 

@@ -17,7 +17,6 @@ public class EventList {
         if(event.getHistory() == null) event.setHistory(this.getLastHistory()+1);
         this.eventList.add(event);
         this.cursor++;
-//        System.out.println(this.getLastHistory());
     }
 
     public void rollback(Dessin dessin){
