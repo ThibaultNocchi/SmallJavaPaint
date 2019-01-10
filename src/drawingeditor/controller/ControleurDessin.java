@@ -46,6 +46,7 @@ public class ControleurDessin implements Initializable {
     @FXML public TextField filename;
     @FXML public Button save;
     @FXML public Button load;
+    @FXML public ToggleButton color;
 
     private Dessin dessin;
     private EventList eventList;
@@ -80,6 +81,12 @@ public class ControleurDessin implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if(del.isSelected()) removeForme(forme);
+            }
+        });
+        shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(color.isSelected()) forme.setCouleur(colorpicker.getValue());
             }
         });
         new DnDToMoveShape(shape);
