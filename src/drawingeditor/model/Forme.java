@@ -5,6 +5,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Paint;
 
 public interface Forme {
+
+	void initialize(double x, double y, double w, double h, Paint color);
+
 	Paint getCouleur();
 	
 	double getPositionX();
@@ -34,4 +37,6 @@ public interface Forme {
 	DoubleProperty widthProperty();
 	
 	DoubleProperty heightProperty();
+
+	String toCsv();
 }

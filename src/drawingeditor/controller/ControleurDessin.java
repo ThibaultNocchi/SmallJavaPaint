@@ -19,6 +19,8 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -40,8 +42,10 @@ public class ControleurDessin implements Initializable {
     @FXML public Button back;
     @FXML public Button forward;
     @FXML public BorderPane borderPane;
-    @FXML public Button dessinInfos;
     @FXML public ScrollPane scrollPane;
+    @FXML public TextField filename;
+    @FXML public Button save;
+    @FXML public Button load;
 
     private Dessin dessin;
     private EventList eventList;
@@ -120,13 +124,6 @@ public class ControleurDessin implements Initializable {
         this.dessin = new DessinImpl();     // Initialise l'implémentation de notre "tableau".
         this.eventList = new EventList();   // Historique des modifications.
 
-        dessinInfos.setOnAction(new EventHandler<ActionEvent>() {   // Affiche la liste des éléments dans le dessin.
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println(dessin.toString());
-            }
-        });
-
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {     // Event qui gère lorsque l'on clique quelque part dans le pane.
             @Override
             public void handle(MouseEvent event) {
@@ -175,6 +172,30 @@ public class ControleurDessin implements Initializable {
                     rollBack();
                 }else if(keyCombinationY.match(event)){
                     rollFoarward();
+                }
+            }
+        });
+
+        save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    System.out.println("Dessin sauvegardé dans "+dessin.save(filename.getText()));
+                } catch (FileNotFoundException e) {
+                    System.out.println("Problème à l'écriture du fichier.");
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        load.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    dessin.load(filename.getText());
+                } catch (IOException e) {
+                    System.out.println("Problème à la lecture du fichier.");
+                    e.printStackTrace();
                 }
             }
         });

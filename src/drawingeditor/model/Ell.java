@@ -8,6 +8,8 @@ public class Ell extends FormeImpl {
         super(x, y, w, h, color);
     }
 
+    public Ell(String csv){ super(csv); }
+
     public String toString(){
         String str = "Ellipse: x="+this.getPositionX();
         str += " ; y="+this.getPositionY();
@@ -16,4 +18,10 @@ public class Ell extends FormeImpl {
         return str;
     }
 
+    @Override
+    public String toCsv() {
+        String str = "";
+        str += "Ell,"+this.getPositionX()+","+this.getPositionY()+","+this.getWidth()+","+this.getHeight()+","+this.getCouleur().toString();
+        return str;
+    }
 }

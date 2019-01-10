@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public abstract class FormeImpl implements Forme {
@@ -15,6 +16,21 @@ public abstract class FormeImpl implements Forme {
     protected DoubleProperty heightProperty;
 
     public FormeImpl(double x, double y, double w, double h, Paint color){
+        this.initialize(x,y,w,h,color);
+    }
+
+    public FormeImpl(String csv){
+        String[] splitCsv = csv.split(",");
+        double x = Double.parseDouble(splitCsv[1]);
+        double y = Double.parseDouble(splitCsv[2]);
+        double w = Double.parseDouble(splitCsv[3]);
+        double h = Double.parseDouble(splitCsv[4]);
+        String[] hex = splitCsv[5].split("0x");
+        Color color = Color.web(hex[1]);
+        this.initialize(x,y,w,h,color);
+    }
+
+    public void initialize(double x, double y, double w, double h, Paint color){
         this.couleurProperty = new SimpleObjectProperty<>(color);
         this.positionXProperty = new SimpleDoubleProperty(x);
         this.positionYProperty = new SimpleDoubleProperty(y);
