@@ -1,11 +1,9 @@
 package drawingeditor.model;
 
-public class EventFormeDelete implements EventForme {
-
-    Forme forme;
+public class EventFormeDelete extends EventForme {
 
     public EventFormeDelete(Forme removedForme){
-        this.forme = removedForme;
+        super(removedForme);
     }
 
     @Override

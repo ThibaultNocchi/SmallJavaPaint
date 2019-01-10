@@ -1,8 +1,24 @@
 package drawingeditor.model;
 
-public interface EventForme {
+public abstract class EventForme {
 
-    public void rollback(Dessin model);
-    public void rollforward(Dessin model);
+    protected Forme forme;
+    protected Integer history;
+
+    public EventForme(Forme forme){
+        this.forme = forme;
+        this.history = null;
+    }
+
+    public Integer getHistory(){
+        return this.history;
+    }
+
+    public void setHistory(Integer history){
+        this.history = history;
+    }
+
+    public abstract void rollback(Dessin model);
+    public abstract void rollforward(Dessin model);
 
 }

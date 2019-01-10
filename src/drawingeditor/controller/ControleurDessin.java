@@ -50,6 +50,8 @@ public class ControleurDessin implements Initializable {
 
     private Dessin dessin;
     private EventList eventList;
+    private int historyDrawing;
+
     public ControleurDessin(){};
 
     private Shape createViewShapeFromShape(final Forme forme){
@@ -81,12 +83,7 @@ public class ControleurDessin implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if(del.isSelected()) removeForme(forme);
-            }
-        });
-        shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(color.isSelected()) forme.setCouleur(colorpicker.getValue());
+                else if(color.isSelected()) forme.setCouleur(colorpicker.getValue());
             }
         });
         new DnDToMoveShape(shape);
@@ -104,7 +101,9 @@ public class ControleurDessin implements Initializable {
     private void addEllAtMouse(MouseEvent event){
         Ell ell = new Ell(event.getX(),event.getY(),this.width.getValueFactory().getValue(),this.height.getValueFactory().getValue(),this.colorpicker.getValue());
         this.dessin.ajouterForme(ell);
-        this.eventList.add(new EventFormeAdd(ell));
+        EventFormeAdd ev = new EventFormeAdd(ell);
+        if(this.draw.isSelected()) ev.setHistory(this.historyDrawing);
+        this.eventList.add(ev);
     }
 
     private void removeForme(Forme forme){
@@ -138,6 +137,13 @@ public class ControleurDessin implements Initializable {
                 if(rect.isSelected()) addRectAtMouse(event);
                 // De même l'on dessine une ellipse si le bouton ellipse est activé.
                 else if(ell.isSelected()) addEllAtMouse(event);
+            }
+        });
+
+        pane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(draw.isSelected()) historyDrawing = eventList.getLastHistory()+1;
             }
         });
 

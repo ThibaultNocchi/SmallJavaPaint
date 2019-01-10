@@ -1,15 +1,14 @@
 package drawingeditor.model;
 
-public class EventFormeMove implements EventForme {
+public class EventFormeMove extends EventForme {
 
     private double tx;
     private double ty;
-    private Forme forme;
 
     public EventFormeMove(double tx, double ty, Forme forme){
+        super(forme);
         this.tx = tx;
         this.ty = ty;
-        this.forme = forme;
     }
 
     @Override

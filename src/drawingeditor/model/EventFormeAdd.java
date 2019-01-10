@@ -1,11 +1,9 @@
 package drawingeditor.model;
 
-public class EventFormeAdd implements EventForme {
-
-    Forme forme;
+public class EventFormeAdd extends EventForme {
 
     public EventFormeAdd(Forme addedForme){
-        this.forme = addedForme;
+        super(addedForme);
     }
 
     @Override
