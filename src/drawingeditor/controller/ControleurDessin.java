@@ -63,27 +63,7 @@ public class ControleurDessin implements Initializable {
 
     private Shape createViewShapeFromShape(final Forme forme){
 
-        Shape shape = null;
-
-        if(forme instanceof Ell){
-            Ellipse ell = new Ellipse();
-            ell.centerXProperty().bind(forme.positionXProperty());
-            ell.centerYProperty().bind(forme.positionYProperty());
-            ell.fillProperty().bind(forme.couleurProperty());
-            final NumberBinding widthBinding = Bindings.divide(forme.widthProperty(),2);
-            final NumberBinding heightBinding = Bindings.divide(forme.heightProperty(), 2);
-            ell.radiusXProperty().bind(widthBinding);
-            ell.radiusYProperty().bind(heightBinding);
-            shape = ell;
-        }else if(forme instanceof Rect){
-            Rectangle rect = new Rectangle();
-            rect.xProperty().bind(forme.positionXProperty());
-            rect.yProperty().bind(forme.positionYProperty());
-            rect.widthProperty().bind(forme.widthProperty());
-            rect.heightProperty().bind(forme.heightProperty());
-            rect.fillProperty().bind(forme.couleurProperty());
-            shape = rect;
-        }
+        Shape shape = forme.createViewShape();
 
         shape.setUserData(forme);
         shape.setOnMouseClicked(new EventHandler<MouseEvent>() {

@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Point d'entrée au programme.
+ */
 public class DrawingEditor extends Application {
 
     @Override

@@ -3,6 +3,7 @@ package drawingeditor.model;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Shape;
 
 public interface Forme {
 
@@ -12,6 +13,8 @@ public interface Forme {
 	double isOutBottom(double h);
 	double isOutLeft();
 	double isOutRight(double w);
+
+	Shape createViewShape();
 
 	Paint getCouleur();
 	

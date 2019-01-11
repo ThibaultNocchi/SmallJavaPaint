@@ -1,6 +1,10 @@
 package drawingeditor.model;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Shape;
 
 public class Ell extends FormeImpl {
     
@@ -40,6 +44,19 @@ public class Ell extends FormeImpl {
     public double isOutRight(double w) {
         if(this.getPositionX() + this.getWidth()/2 > w) return this.getPositionX() + this.getWidth()/2 - w;
         else return 0;
+    }
+
+    @Override
+    public Shape createViewShape() {
+        Ellipse ell = new Ellipse();
+        ell.centerXProperty().bind(this.positionXProperty());
+        ell.centerYProperty().bind(this.positionYProperty());
+        ell.fillProperty().bind(this.couleurProperty());
+        final NumberBinding widthBinding = Bindings.divide(this.widthProperty(),2);
+        final NumberBinding heightBinding = Bindings.divide(this.heightProperty(), 2);
+        ell.radiusXProperty().bind(widthBinding);
+        ell.radiusYProperty().bind(heightBinding);
+        return ell;
     }
 
     @Override

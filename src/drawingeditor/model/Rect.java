@@ -1,6 +1,8 @@
 package drawingeditor.model;
 
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class Rect extends FormeImpl {
 
@@ -40,6 +42,17 @@ public class Rect extends FormeImpl {
     public double isOutRight(double w) {
         if(this.getPositionX() + this.getWidth() > w) return this.getPositionX() + this.getWidth() - w;
         else return 0;
+    }
+
+    @Override
+    public Shape createViewShape() {
+        Rectangle rect = new Rectangle();
+        rect.xProperty().bind(this.positionXProperty());
+        rect.yProperty().bind(this.positionYProperty());
+        rect.widthProperty().bind(this.widthProperty());
+        rect.heightProperty().bind(this.heightProperty());
+        rect.fillProperty().bind(this.couleurProperty());
+        return rect;
     }
 
     public String toCsv(){
