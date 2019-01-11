@@ -29,6 +29,15 @@ public class DessinImpl implements Dessin {
     }
 
     @Override
+    public void deplacerToutesFormes(double tx, double ty) {
+
+        for(Object forme : this.liste){
+            ((Forme) forme).deplacer(tx, ty);
+        }
+
+    }
+
+    @Override
     public void viderDessin() { this.liste.clear(); }
 
     @Override

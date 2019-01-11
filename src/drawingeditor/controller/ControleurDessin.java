@@ -7,14 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -47,6 +46,7 @@ public class ControleurDessin implements Initializable {
     @FXML public Button save;
     @FXML public Button load;
     @FXML public ToggleButton color;
+    @FXML public Button setBg;
 
     private Dessin dessin;
     private EventList eventList;
@@ -109,6 +109,7 @@ public class ControleurDessin implements Initializable {
         EventFormeAdd ev = new EventFormeAdd(ell);
         if(this.draw.isSelected()) ev.setHistory(this.historyDrawing);
         this.eventList.add(ev);
+        this.updateSizePane(ell);
     }
 
     private void removeForme(Forme forme){
@@ -122,6 +123,42 @@ public class ControleurDessin implements Initializable {
 
     private void rollFoarward(){
         this.eventList.rollforward(this.dessin);
+    }
+
+    private void updateSizePane(Forme forme){
+
+        double xMax, yMax;
+        double xPane = this.pane.getPrefWidth();
+        double yPane = this.pane.getPrefHeight();
+        double newX = forme.getPositionX();
+        double newY = forme.getPositionY();
+        double width = forme.getWidth();
+        double height = forme.getHeight();
+
+        double tx = 0;
+        double ty = 0;
+        double finalXPane;
+
+        xMax = Math.max(xPane, newX + width);
+        if(xMax != xPane) this.pane.setPrefWidth(xMax);
+
+        yMax = Math.max(yPane, newY + height);
+        if(yMax != yPane) this.pane.setPrefHeight(yMax);
+
+        if(newX - width/2 < 0){
+            tx = -(newX - width/2);
+            this.pane.setPrefWidth(xPane + tx);
+        }
+
+        if(newY - height < 0){
+            ty = -(newY - height);
+            this.pane.setPrefHeight(yPane + ty);
+        }
+
+        if(tx != 0 || ty != 0) {
+            this.dessin.deplacerToutesFormes(tx, ty);
+        }
+
     }
 
     @Override
@@ -179,6 +216,7 @@ public class ControleurDessin implements Initializable {
                         else currentY = finalY;
                     }
                     addEllAtCoords(currentX, currentY);
+
                 }
             }
         });
@@ -188,6 +226,17 @@ public class ControleurDessin implements Initializable {
             public void handle(ActionEvent event) {
                 dessin.viderDessin();
                 eventList.clear();
+                pane.setPrefSize(1200,720);
+            }
+        });
+
+        setBg.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Paint fill = colorpicker.getValue();
+                BackgroundFill bf = new BackgroundFill(fill, CornerRadii.EMPTY, Insets.EMPTY);
+                Background bg = new Background(bf);
+                pane.setBackground(bg);
             }
         });
 
@@ -302,6 +351,7 @@ public class ControleurDessin implements Initializable {
                     ((FormeImpl) view.getUserData()).deplacer(tx,ty);
                     this.pressPositionX = evt.getSceneX();
                     this.pressPositionY = evt.getSceneY();
+                    updateSizePane((Forme)view.getUserData());
                 }
             });
 

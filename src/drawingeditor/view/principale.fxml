@@ -14,7 +14,7 @@
 
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingeditor.controller.ControleurDessin">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingeditor.controller.ControleurDessin">
    <fx:define>
       <ToggleGroup fx:id="groupEditing" />
    </fx:define>
@@ -34,6 +34,8 @@
             <ToggleButton fx:id="move" layoutX="230.0" layoutY="11.0" mnemonicParsing="false" text="move" toggleGroup="$groupEditing" />
             <Separator layoutX="148.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <ColorPicker fx:id="colorpicker" prefHeight="26.0" prefWidth="114.0" />
+            <Button fx:id="setBg" mnemonicParsing="false" text="set bg" />
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <Label text="" fx:id="x" />
             <Label fx:id="y" layoutX="345.0" layoutY="16.0" text="" />
             <Label text="  width:" />
@@ -49,9 +51,9 @@
       </ToolBar>
    </top>
    <center>
-      <ScrollPane fx:id="scrollPane" prefHeight="900.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scrollPane" BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="pane" prefHeight="900.0" prefWidth="1280.0" />
+            <Pane fx:id="pane" prefHeight="720.0" prefWidth="1200.0" />
          </content>
       </ScrollPane>
    </center>
