@@ -72,6 +72,11 @@ public abstract class FormeImpl implements Forme {
         this.positionYProperty.setValue(ty+this.getPositionY());
     }
 
+    public void redimensionner(final double tx, final double ty){
+        this.widthProperty.setValue(tx+this.getWidth());
+        this.heightProperty.setValue(ty+this.getHeight());
+    }
+
     public void setWidth(final double w){
         this.widthProperty.setValue(w);
     }

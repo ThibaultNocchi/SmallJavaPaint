@@ -160,8 +160,8 @@ public class ControleurDessin implements Initializable {
             this.pane.setPrefWidth(xPane + tx);
         }
 
-        if(newY - height < 0){
-            ty = -(newY - height);
+        if(newY - height/2 < 0){
+            ty = -(newY - height/2);
             this.pane.setPrefHeight(yPane + ty);
         }
 
@@ -210,7 +210,6 @@ public class ControleurDessin implements Initializable {
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {     // Event gérant un outil "crayon".
             @Override
             public void handle(MouseEvent event) {
-//                if(draw.isSelected()) addEllAtMouse(event);
                 if(draw.isSelected()){
                     double currentX = drawX;
                     double currentY = drawY;
@@ -341,11 +340,15 @@ public class ControleurDessin implements Initializable {
         public DnDToMoveShape(Shape view){
 
             view.setOnMousePressed(evt -> {
-                if(move.isSelected()) {
+
+                if(move.isSelected() || resize.isSelected()){
                     this.txTotal = 0;
                     this.tyTotal = 0;
                     this.pressPositionX = evt.getSceneX();
                     this.pressPositionY = evt.getSceneY();
+                }
+
+                if(move.isSelected()) {
                     x.setVisible(true);
                     y.setVisible(true);
                     final StringExpression xBinding = Bindings.convert(((FormeImpl) view.getUserData()).positionXProperty());
@@ -353,19 +356,32 @@ public class ControleurDessin implements Initializable {
                     x.textProperty().bind(Bindings.createStringBinding(() -> "x: " + ((FormeImpl) view.getUserData()).positionXProperty().get(), ((FormeImpl) view.getUserData()).positionXProperty()));
                     y.textProperty().bind(Bindings.createStringBinding(() -> "y: " + ((FormeImpl) view.getUserData()).positionYProperty().get(), ((FormeImpl) view.getUserData()).positionYProperty()));
                 }
+
             });
 
             view.setOnMouseDragged(evt -> {
-                if(move.isSelected()){
-                    final double tx = evt.getSceneX() - this.pressPositionX;
-                    final double ty = evt.getSceneY() - this.pressPositionY;
+
+                double tx = 0, ty = 0;
+
+                if(move.isSelected() || resize.isSelected()){
+                    tx = evt.getSceneX() - this.pressPositionX;
+                    ty = evt.getSceneY() - this.pressPositionY;
                     this.txTotal += tx;
                     this.tyTotal += ty;
-                    ((FormeImpl) view.getUserData()).deplacer(tx,ty);
                     this.pressPositionX = evt.getSceneX();
                     this.pressPositionY = evt.getSceneY();
+                }
+
+                if(move.isSelected()){
+                    ((FormeImpl) view.getUserData()).deplacer(tx,ty);
+                }else if(resize.isSelected()){
+                    ((FormeImpl) view.getUserData()).redimensionner(tx, ty);
+                }
+
+                if(move.isSelected() || resize.isSelected()){
                     updateSizePane((Forme)view.getUserData());
                 }
+
             });
 
             view.setOnMouseReleased(evt -> {
@@ -377,6 +393,8 @@ public class ControleurDessin implements Initializable {
                     x.setText("");
                     y.setText("");
                     eventList.add(new EventFormeMove(this.txTotal, this.tyTotal, (FormeImpl) view.getUserData()));
+                }else if(resize.isSelected()){
+                    eventList.add(new EventFormeResize((Forme) view.getUserData(), this.txTotal, this.tyTotal));
                 }
             });
 

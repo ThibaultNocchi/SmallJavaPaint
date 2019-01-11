@@ -23,6 +23,8 @@ public interface Forme {
 	void setPosition(final double x, final double y);
 	
 	void deplacer(final double tx, final double ty);
+
+	void redimensionner(final double tx, final double ty);
 	
 	void setWidth(final double w);
 	
