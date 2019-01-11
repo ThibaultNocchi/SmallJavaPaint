@@ -10,6 +10,10 @@ public abstract class EventForme {
         this.history = null;
     }
 
+    public Forme getForme(){
+        return this.forme;
+    }
+
     public Integer getHistory(){
         return this.history;
     }

@@ -1,5 +1,7 @@
 package drawingeditor.model;
 
+import javafx.scene.paint.Paint;
+
 import java.util.ArrayList;
 
 public class EventList {
@@ -45,6 +47,25 @@ public class EventList {
     public int getLastHistory(){
         if(this.cursor == -1) return -1;
         else return this.eventList.get(this.cursor).getHistory();
+    }
+
+    public void changeColorOfAllFormeWithSameHistory(EventFormeColor eventColor){
+        ArrayList<Integer> listHistories = new ArrayList<>();
+        ArrayList<EventFormeColor> newEvents = new ArrayList<>();
+        for(EventForme event : this.eventList){
+            if(event.getForme() == eventColor.getForme()) listHistories.add(event.getHistory());
+        }
+        for(EventForme event : this.eventList){
+            if(listHistories.contains(event.getHistory())){
+                Paint before = event.getForme().getCouleur();
+                event.getForme().setCouleur(eventColor.getForme().getCouleur());
+                EventFormeColor newEvent = new EventFormeColor(event.getForme(), before, event.getForme().getCouleur());
+                newEvent.setHistory(eventColor.getHistory());
+                newEvents.add(newEvent);
+                ++this.cursor;
+            }
+        }
+        this.eventList.addAll(newEvents);
     }
 
 }

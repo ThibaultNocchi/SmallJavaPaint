@@ -93,7 +93,9 @@ public class ControleurDessin implements Initializable {
                 else if(color.isSelected()){
                     Paint before = forme.getCouleur();
                     forme.setCouleur(colorpicker.getValue());
-                    eventList.add(new EventFormeColor(forme, before, forme.getCouleur()));
+                    EventFormeColor newColor = new EventFormeColor(forme, before, forme.getCouleur());
+                    eventList.add(newColor);
+                    eventList.changeColorOfAllFormeWithSameHistory(newColor);
                 }
             }
         });
@@ -162,10 +164,6 @@ public class ControleurDessin implements Initializable {
             this.pane.setPrefWidth(xPane + tx);
         }
 
-        /*if(newY - height/2 < 0){
-            ty = -(newY - height/2);
-            this.pane.setPrefHeight(yPane + ty);
-        }*/
         depassement = forme.isOutTop();
         if(depassement != 0){
             ty = depassement;
