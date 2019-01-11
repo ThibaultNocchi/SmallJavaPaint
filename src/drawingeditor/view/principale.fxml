@@ -25,14 +25,14 @@
             <ToggleButton fx:id="ell" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="ell" toggleGroup="$groupEditing" />
             <ToggleButton fx:id="draw" mnemonicParsing="false" text="draw" toggleGroup="$groupEditing" />
             <ToggleButton fx:id="color" mnemonicParsing="false" text="color" toggleGroup="$groupEditing" />
+            <ToggleButton fx:id="move" mnemonicParsing="false" text="move" toggleGroup="$groupEditing" />
+            <ToggleButton fx:id="resize" mnemonicParsing="false" text="resize" toggleGroup="$groupEditing" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <Button fx:id="back" mnemonicParsing="false" text="ctrl+z" />
             <Button fx:id="forward" mnemonicParsing="false" text="ctrl+y" />
             <ToggleButton fx:id="del" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="del" toggleGroup="$groupEditing" />
             <Button fx:id="clear" mnemonicParsing="false" text="clr" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="4.0" />
-            <ToggleButton fx:id="move" layoutX="230.0" layoutY="11.0" mnemonicParsing="false" text="move" toggleGroup="$groupEditing" />
-            <Separator layoutX="148.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
             <ColorPicker fx:id="colorpicker" prefHeight="26.0" prefWidth="114.0" />
             <Button fx:id="setBg" mnemonicParsing="false" text="set bg" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
@@ -43,8 +43,8 @@
             <Label layoutX="353.0" layoutY="16.0" text="  height:" />
             <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="20.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" prefWidth="80" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
-            <Label text="Filename: " prefWidth="100" />
-            <TextField fx:id="filename" />
+            <Label text="Filename: " />
+            <TextField fx:id="filename" prefWidth="100" />
             <Button fx:id="save" mnemonicParsing="false" text="Save" />
             <Button fx:id="load" mnemonicParsing="false" text="Load" />
          </items>

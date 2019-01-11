@@ -30,23 +30,29 @@ public class ControleurDessin implements Initializable {
     @FXML public ToggleButton ell;
     @FXML public ToggleButton del;
     @FXML public ToggleButton move;
+    @FXML public ToggleButton resize;
+    @FXML public ToggleButton color;
+    @FXML public ToggleButton draw;
+
+    @FXML public Button clear;
+    @FXML public Button back;
+    @FXML public Button forward;
+    @FXML public Button setBg;
+
     @FXML public ColorPicker colorpicker;
+
     @FXML public Label x;
     @FXML public Label y;
     @FXML public Spinner<Double> width;
     @FXML public Spinner<Double> height;
-    @FXML public Pane pane;
-    @FXML public Button clear;
-    @FXML public ToggleButton draw;
-    @FXML public Button back;
-    @FXML public Button forward;
-    @FXML public BorderPane borderPane;
-    @FXML public ScrollPane scrollPane;
+
     @FXML public TextField filename;
     @FXML public Button save;
     @FXML public Button load;
-    @FXML public ToggleButton color;
-    @FXML public Button setBg;
+
+    @FXML public Pane pane;
+    @FXML public BorderPane borderPane;
+    @FXML public ScrollPane scrollPane;
 
     private Dessin dessin;
     private EventList eventList;
@@ -84,7 +90,11 @@ public class ControleurDessin implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if(del.isSelected()) removeForme(forme);
-                else if(color.isSelected()) forme.setCouleur(colorpicker.getValue());
+                else if(color.isSelected()){
+                    Paint before = forme.getCouleur();
+                    forme.setCouleur(colorpicker.getValue());
+                    eventList.add(new EventFormeColor(forme, before, forme.getCouleur()));
+                }
             }
         });
         new DnDToMoveShape(shape);
