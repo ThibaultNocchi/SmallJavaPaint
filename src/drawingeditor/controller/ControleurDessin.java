@@ -168,9 +168,13 @@ public class ControleurDessin implements Initializable {
         this.colorpicker.setValue(javafx.scene.paint.Color.RED);    // Sélectionne par défaut la couleur rouge.
         this.x.setVisible(false);   // Cache le label des coordonnées X et Y pour quand on bouge une forme.
         this.y.setVisible(false);
-        this.pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));   // Colorie le fond en blanc.
+//        this.pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));   // Colorie le fond en blanc.
         this.dessin = new DessinImpl();     // Initialise l'implémentation de notre "tableau".
         this.eventList = new EventList();   // Historique des modifications.
+        this.pane.backgroundProperty().bind(Bindings.createObjectBinding(()->{
+            BackgroundFill bf = new BackgroundFill(this.dessin.getBg(), null, null);
+            return new Background(bf);
+        }, this.dessin.bgProperty()));
 
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {     // Event qui gère lorsque l'on clique quelque part dans le pane.
             @Override
@@ -233,10 +237,7 @@ public class ControleurDessin implements Initializable {
         setBg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Paint fill = colorpicker.getValue();
-                BackgroundFill bf = new BackgroundFill(fill, CornerRadii.EMPTY, Insets.EMPTY);
-                Background bg = new Background(bf);
-                pane.setBackground(bg);
+                dessin.setBg(colorpicker.getValue());
             }
         });
 
@@ -271,7 +272,8 @@ public class ControleurDessin implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    System.out.println("Dessin sauvegardé dans "+dessin.save(filename.getText()));
+                    Paint paint = pane.getBackground().getFills().get(0).getFill();
+                    System.out.println("Dessin sauvegardé dans "+dessin.save(filename.getText(), pane.getPrefWidth(), pane.getPrefHeight()));
                 } catch (FileNotFoundException e) {
                     System.out.println("Problème à l'écriture du fichier.");
                     e.printStackTrace();
@@ -283,7 +285,8 @@ public class ControleurDessin implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    dessin.load(filename.getText());
+                    double[] paneSizes = dessin.load(filename.getText());
+                    if(paneSizes[0] != 0 && paneSizes[1] != 0) pane.setPrefSize(paneSizes[0], paneSizes[1]);
                 } catch (IOException e) {
                     System.out.println("Problème à la lecture du fichier.");
                     e.printStackTrace();

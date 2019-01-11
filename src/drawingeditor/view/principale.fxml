@@ -39,11 +39,11 @@
             <Label text="" fx:id="x" />
             <Label fx:id="y" layoutX="345.0" layoutY="16.0" text="" />
             <Label text="  width:" />
-            <Spinner fx:id="width" amountToStepBy="1.00" editable="true" initialValue="20.0" max="500.0" min="0.00" />
+            <Spinner fx:id="width" amountToStepBy="1.00" editable="true" initialValue="20.0" max="500.0" min="0.00" prefWidth="80" />
             <Label layoutX="353.0" layoutY="16.0" text="  height:" />
-            <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="20.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" />
+            <Spinner fx:id="height" amountToStepBy="1.00" editable="true" initialValue="20.0" layoutX="406.0" layoutY="11.0" max="500.0" min="0.00" prefWidth="80" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="2.0" />
-            <Label text="Filename: " />
+            <Label text="Filename: " prefWidth="100" />
             <TextField fx:id="filename" />
             <Button fx:id="save" mnemonicParsing="false" text="Save" />
             <Button fx:id="load" mnemonicParsing="false" text="Load" />
