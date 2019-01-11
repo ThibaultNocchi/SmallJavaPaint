@@ -8,6 +8,11 @@ public interface Forme {
 
 	void initialize(double x, double y, double w, double h, Paint color);
 
+	double isOutTop();
+	double isOutBottom(double h);
+	double isOutLeft();
+	double isOutRight(double w);
+
 	Paint getCouleur();
 	
 	double getPositionX();

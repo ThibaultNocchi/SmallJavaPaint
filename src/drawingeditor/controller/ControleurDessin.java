@@ -148,20 +148,27 @@ public class ControleurDessin implements Initializable {
         double tx = 0;
         double ty = 0;
         double finalXPane;
+        double depassement;
 
-        xMax = Math.max(xPane, newX + width);
-        if(xMax != xPane) this.pane.setPrefWidth(xMax);
+        depassement = forme.isOutRight(xPane);
+        if(depassement != 0) this.pane.setPrefWidth(xPane+depassement);
 
-        yMax = Math.max(yPane, newY + height);
-        if(yMax != yPane) this.pane.setPrefHeight(yMax);
+        depassement = forme.isOutBottom(yPane);
+        if(depassement != 0) this.pane.setPrefHeight(yPane+depassement);
 
-        if(newX - width/2 < 0){
-            tx = -(newX - width/2);
+        depassement = forme.isOutLeft();
+        if(depassement != 0){
+            tx = depassement;
             this.pane.setPrefWidth(xPane + tx);
         }
 
-        if(newY - height/2 < 0){
+        /*if(newY - height/2 < 0){
             ty = -(newY - height/2);
+            this.pane.setPrefHeight(yPane + ty);
+        }*/
+        depassement = forme.isOutTop();
+        if(depassement != 0){
+            ty = depassement;
             this.pane.setPrefHeight(yPane + ty);
         }
 

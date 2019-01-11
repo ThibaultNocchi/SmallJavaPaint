@@ -19,6 +19,30 @@ public class Ell extends FormeImpl {
     }
 
     @Override
+    public double isOutTop() {
+        if(this.getPositionY() - this.getHeight()/2 < 0) return -(this.getPositionY() - this.getHeight()/2);
+        else return 0;
+    }
+
+    @Override
+    public double isOutBottom(double h) {
+        if(this.getPositionY() + this.getHeight()/2 > h) return this.getPositionY() + this.getHeight()/2 - h;
+        else return 0;
+    }
+
+    @Override
+    public double isOutLeft() {
+        if(this.getPositionX() - this.getWidth()/2 < 0) return -(this.getPositionX() - this.getWidth()/2);
+        else return 0;
+    }
+
+    @Override
+    public double isOutRight(double w) {
+        if(this.getPositionX() + this.getWidth()/2 > w) return this.getPositionX() + this.getWidth()/2 - w;
+        else return 0;
+    }
+
+    @Override
     public String toCsv() {
         String str = "";
         str += "Ell,"+this.getPositionX()+","+this.getPositionY()+","+this.getWidth()+","+this.getHeight()+","+this.getCouleur().toString();
