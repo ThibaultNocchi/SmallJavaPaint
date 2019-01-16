@@ -59,7 +59,7 @@ public class ControleurDessin implements Initializable {
     private int historyDrawing;
     private double drawX, drawY;
 
-    public ControleurDessin(){};
+    public ControleurDessin(){}
 
     private Shape createViewShapeFromShape(final Forme forme){
 
