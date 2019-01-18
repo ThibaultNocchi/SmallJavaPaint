@@ -21,26 +21,30 @@ public interface Forme {
 	void initialize(double x, double y, double w, double h, Paint color);
 
 	/**
-	 * Renvoie true si la forme dépasse en haut du dessin.
+	 * Si le haut de la forme dépasse, renvoie sa distance par rapport au bord.
+	 * Sinon renvoie 0.
 	 * @return
 	 */
 	double isOutTop();
 
 	/**
-	 * Renvoie true si la forme dépasse en bas du dessin.
+	 * Si le bas de la forme dépasse, renvoie sa distance par rapport au bord.
+	 * Sinon renvoie 0.
 	 * @param h Hauteur du pane.
 	 * @return
 	 */
 	double isOutBottom(double h);
 
 	/**
-	 * Renvoie true si la forme dépasse à gauche du dessin.
+	 * Si la gauche de la forme dépasse, renvoie sa distance par rapport au bord.
+	 * Sinon renvoie 0.
 	 * @return
 	 */
 	double isOutLeft();
 
 	/**
-	 * Renvoie true si la forme dépasse à droite du dessin.
+	 * Si la droite de la forme dépasse, renvoie sa distance par rapport au bord.
+	 * Sinon renvoie 0.
 	 * @param w Largeur du pane.
 	 * @return
 	 */
