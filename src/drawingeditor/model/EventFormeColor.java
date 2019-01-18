@@ -7,7 +7,8 @@ import javafx.scene.paint.Paint;
  */
 public class EventFormeColor extends EventForme {
 
-    private Paint before, after;
+    private final Paint before;
+    private final Paint after;
 
     /**
      * Sauvegarde la couleur d'avant et après la modification.

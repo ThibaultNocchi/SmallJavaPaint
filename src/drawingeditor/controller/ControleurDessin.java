@@ -3,19 +3,13 @@ package drawingeditor.controller;
 import drawingeditor.model.*;
 import javafx.beans.binding.*;
 import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.io.FileNotFoundException;
@@ -27,6 +21,7 @@ import java.util.ResourceBundle;
 /**
  * Classe contrôleur de la fenêtre.
  */
+@SuppressWarnings("unused")
 public class ControleurDessin implements Initializable {
 
     @FXML public ToggleButton rect;
@@ -77,8 +72,6 @@ public class ControleurDessin implements Initializable {
      */
     private double drawX, drawY;
 
-    public ControleurDessin(){}
-
     /**
      * Créé une vue pour une forme et associe tous les bindings nécessaires et les événements JavaFX.
      * @param forme La forme à gérer.
@@ -89,17 +82,14 @@ public class ControleurDessin implements Initializable {
         Shape shape = forme.createViewShape();
 
         shape.setUserData(forme);
-        shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(del.isSelected()) removeForme(forme);
-                else if(color.isSelected()){
-                    Paint before = forme.getCouleur();
-                    forme.setCouleur(colorpicker.getValue());
-                    EventFormeColor newColor = new EventFormeColor(forme, before, forme.getCouleur());
-                    eventList.add(newColor);
-                    eventList.changeColorOfAllFormeWithSameHistory(newColor);
-                }
+        shape.setOnMouseClicked(event -> {
+            if(del.isSelected()) removeForme(forme);
+            else if(color.isSelected()){
+                Paint before = forme.getCouleur();
+                forme.setCouleur(colorpicker.getValue());
+                EventFormeColor newColor = new EventFormeColor(forme, before, forme.getCouleur());
+                eventList.add(newColor);
+                eventList.changeColorOfAllFormeWithSameHistory(newColor);
             }
         });
         new DnDToMoveShape(shape);  // Assciation d'un objet surveillant les déplacements de la vue.
@@ -171,17 +161,11 @@ public class ControleurDessin implements Initializable {
      */
     private void updateSizePane(Forme forme){
 
-        double xMax, yMax;
         double xPane = this.pane.getPrefWidth();
         double yPane = this.pane.getPrefHeight();
-        double newX = forme.getPositionX();
-        double newY = forme.getPositionY();
-        double width = forme.getWidth();
-        double height = forme.getHeight();
 
         double tx = 0;
         double ty = 0;
-        double finalXPane;
         double depassement;
 
         depassement = forme.isOutRight(xPane);
@@ -223,144 +207,116 @@ public class ControleurDessin implements Initializable {
             return new Background(bf);
         }, this.dessin.bgProperty()));
 
-        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {     // Event qui gère lorsque l'on clique quelque part dans le pane.
-            @Override
-            public void handle(MouseEvent event) {
-                // Si le bouton rectangle est activé, on ajoute une forme rectangulaire au dessin aux coordonnées de la souris et avec les paramètres de taille et de couleur spécifiés dans les contrôles.
-                if(rect.isSelected()) addRectAtMouse(event);
-                // De même l'on dessine une ellipse si le bouton ellipse est activé.
-                else if(ell.isSelected()) addEllAtMouse(event);
+        // Event qui gère lorsque l'on clique quelque part dans le pane.
+        pane.setOnMouseClicked(event -> {
+            // Si le bouton rectangle est activé, on ajoute une forme rectangulaire au dessin aux coordonnées de la souris et avec les paramètres de taille et de couleur spécifiés dans les contrôles.
+            if(rect.isSelected()) addRectAtMouse(event);
+            // De même l'on dessine une ellipse si le bouton ellipse est activé.
+            else if(ell.isSelected()) addEllAtMouse(event);
+        });
+
+        // Event gérant le premier clic lors d'un dessin "crayon".
+        pane.setOnMousePressed(event -> {
+            if(draw.isSelected()){
+                historyDrawing = eventList.getLastHistory()+1;  // On prépare la valeur d'historique pour toutes les formes qui vont être ajoutées.
+                drawX = event.getX();   // Initialisation de la première position de la souris.
+                drawY = event.getY();
             }
         });
 
-        pane.setOnMousePressed(new EventHandler<MouseEvent>() {     // Event gérant le premier clic lors d'un dessin "crayon".
-            @Override
-            public void handle(MouseEvent event) {
-                if(draw.isSelected()){
-                    historyDrawing = eventList.getLastHistory()+1;  // On prépare la valeur d'historique pour toutes les formes qui vont être ajoutées.
-                    drawX = event.getX();   // Initialisation de la première position de la souris.
-                    drawY = event.getY();
-                }
-            }
-        });
-
-        pane.setOnMouseDragged(new EventHandler<MouseEvent>() {     // Event gérant un outil "crayon".
-            // Cet événement ne dessine pas seulement une forme à l'endroit de la souris, car sinon des trop gros trous apparaissent si l'on bouge la souris trop vite.
-            // Du coup à chaque appel de l'événement, on dessine une sorte de trait entre la position précédente et actuelle, puis on sauvegarde la position actuelle pour le prochain coup.
-            // C'est l'utilité de drawX et drawY.
-            @Override
-            public void handle(MouseEvent event) {
-                if(draw.isSelected()){
-                    double currentX = drawX;
-                    double currentY = drawY;
-                    double finalX = event.getX();
-                    double finalY = event.getY();
-                    drawX = finalX;
-                    drawY = finalY;
-                    double stepX = width.getValue() / 3;
-                    double stepY = height.getValue() / 3;
-                    while(currentX != finalX && currentY != finalY){
-                        addEllAtCoords(currentX, currentY);
-                        if(currentX <= finalX - stepX) currentX += stepX;
-                        else if(currentX >= finalX + stepX) currentX -= stepX;
-                        else currentX = finalX;
-                        if(currentY <= finalY - stepY) currentY += stepY;
-                        else if(currentY >= finalY + stepY) currentY -= stepY;
-                        else currentY = finalY;
-                    }
+        // Event gérant un outil "crayon".
+// Cet événement ne dessine pas seulement une forme à l'endroit de la souris, car sinon des trop gros trous apparaissent si l'on bouge la souris trop vite.
+// Du coup à chaque appel de l'événement, on dessine une sorte de trait entre la position précédente et actuelle, puis on sauvegarde la position actuelle pour le prochain coup.
+// C'est l'utilité de drawX et drawY.
+        pane.setOnMouseDragged(event -> {
+            if(draw.isSelected()){
+                double currentX = drawX;
+                double currentY = drawY;
+                double finalX = event.getX();
+                double finalY = event.getY();
+                drawX = finalX;
+                drawY = finalY;
+                double stepX = width.getValue() / 3;
+                double stepY = height.getValue() / 3;
+                while(currentX != finalX && currentY != finalY){
                     addEllAtCoords(currentX, currentY);
-
+                    if(currentX <= finalX - stepX) currentX += stepX;
+                    else if(currentX >= finalX + stepX) currentX -= stepX;
+                    else currentX = finalX;
+                    if(currentY <= finalY - stepY) currentY += stepY;
+                    else if(currentY >= finalY + stepY) currentY -= stepY;
+                    else currentY = finalY;
                 }
+                addEllAtCoords(currentX, currentY);
+
             }
         });
 
-        clear.setOnAction(new EventHandler<ActionEvent>() {     // Si l'on clique sur le bouton de clear, on vide le dessin et l'historique.
-            @Override
-            public void handle(ActionEvent event) {
-                dessin.viderDessin();
-                eventList.clear();
-                pane.setPrefSize(1200,720);
-            }
+        // Si l'on clique sur le bouton de clear, on vide le dessin et l'historique.
+        clear.setOnAction(event -> {
+            dessin.viderDessin();
+            eventList.clear();
+            pane.setPrefSize(1200,720);
         });
 
-        setBg.setOnAction(new EventHandler<ActionEvent>() {     // Change la couleur de fond.
-            @Override
-            public void handle(ActionEvent event) {
-                dessin.setBg(colorpicker.getValue());
-            }
-        });
+        // Change la couleur de fond.
+        setBg.setOnAction(event -> dessin.setBg(colorpicker.getValue()));
 
-        back.setOnAction(new EventHandler<ActionEvent>() {  // Demande un rollback au gestionnaire d'historique.
-            @Override
-            public void handle(ActionEvent event) {
+        // Demande un rollback au gestionnaire d'historique.
+        back.setOnAction(event -> rollBack());
+
+        // Demande un retour en avant au gestionnaire d'historique.
+        forward.setOnAction(event -> rollFoarward());
+
+        final KeyCombination keyCombinationZ = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);  // Ctrl + Z
+        final KeyCombination keyCombinationY = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);  // Ctrl + Y
+        // Gère l'appel des fonctions correspondant au ctrl z et ctrl y.
+        borderPane.setOnKeyPressed(event -> {
+            if(keyCombinationZ.match(event)){
                 rollBack();
-            }
-        });
-
-        forward.setOnAction(new EventHandler<ActionEvent>() {   // Demande un retour en avant au gestionnaire d'historique.
-            @Override
-            public void handle(ActionEvent event) {
+            }else if(keyCombinationY.match(event)){
                 rollFoarward();
             }
         });
 
-        final KeyCombination keyCombinationZ = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);  // Ctrl + Z
-        final KeyCombination keyCombinationY = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);  // Ctrl + Y
-        borderPane.setOnKeyPressed(new EventHandler<KeyEvent>() {   // Gère l'appel des fonctions correspondant au ctrl z et ctrl y.
-            @Override
-            public void handle(KeyEvent event) {
-                if(keyCombinationZ.match(event)){
-                    rollBack();
-                }else if(keyCombinationY.match(event)){
-                    rollFoarward();
-                }
+        // Gère la sauvegarde du dessin.
+        save.setOnAction(event -> {
+            try {
+                System.out.println("Dessin sauvegardé dans "+dessin.save(filename.getText(), pane.getPrefWidth(), pane.getPrefHeight()));
+            } catch (FileNotFoundException e) {
+                System.out.println("Problème à l'écriture du fichier.");
+                e.printStackTrace();
             }
         });
 
-        save.setOnAction(new EventHandler<ActionEvent>() {  // Gère la sauvegarde du dessin.
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    System.out.println("Dessin sauvegardé dans "+dessin.save(filename.getText(), pane.getPrefWidth(), pane.getPrefHeight()));
-                } catch (FileNotFoundException e) {
-                    System.out.println("Problème à l'écriture du fichier.");
-                    e.printStackTrace();
-                }
+        // Gère le chargement d'un dessin.
+        load.setOnAction(event -> {
+            try {
+                double[] paneSizes = dessin.load(filename.getText());
+                if(paneSizes[0] != 0 && paneSizes[1] != 0) pane.setPrefSize(paneSizes[0], paneSizes[1]);    // Si le fichier spécifiait une pane size, on l'applique.
+            } catch (IOException e) {
+                System.out.println("Problème à la lecture du fichier.");
+                e.printStackTrace();
             }
         });
 
-        load.setOnAction(new EventHandler<ActionEvent>() {  // Gère le chargement d'un dessin.
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    double[] paneSizes = dessin.load(filename.getText());
-                    if(paneSizes[0] != 0 && paneSizes[1] != 0) pane.setPrefSize(paneSizes[0], paneSizes[1]);    // Si le fichier spécifiait une pane size, on l'applique.
-                } catch (IOException e) {
-                    System.out.println("Problème à la lecture du fichier.");
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        this.dessin.getFormes().addListener(new ListChangeListener<Forme>() {   // Listener surveillant le modèle.
-            @Override
-            public void onChanged(Change<? extends Forme> event) {  // Quand le modèle change
-                if(event.next()){
-                    if(event.wasAdded()){   // Si il y a eu des ajouts
-                        List<? extends Forme> liste = event.getAddedSubList();  // On récupère la liste des formes ajoutées
-                        for(Forme forme : liste){   // Pour chaque forme on lui créé une vue et on l'ajoute au pane JavaFX.
-                            Shape shape = createViewShapeFromShape(forme);
-                            pane.getChildren().add(shape);
+        // Listener surveillant le modèle.
+        this.dessin.getFormes().addListener((ListChangeListener<Forme>) event -> {  // Quand le modèle change
+            if(event.next()){
+                if(event.wasAdded()){   // Si il y a eu des ajouts
+                    List<? extends Forme> liste = event.getAddedSubList();  // On récupère la liste des formes ajoutées
+                    for(Forme forme : liste){   // Pour chaque forme on lui créé une vue et on l'ajoute au pane JavaFX.
+                        Shape shape = createViewShapeFromShape(forme);
+                        pane.getChildren().add(shape);
+                    }
+                }else if(event.wasRemoved()){   // Si il y a eu des suppressions
+                    List<? extends Forme> liste = event.getRemoved();
+                    for(Forme forme : liste){
+                        Node toDelete = null;
+                        for(Node affiche : pane.getChildren()){     // On parcourt toutes les formes affichées
+                            if(affiche.getUserData() == forme) toDelete = affiche;  // Si la forme affichée correspond à la forme du modèle que l'on veut supprimer, on garde la vue de côté.
                         }
-                    }else if(event.wasRemoved()){   // Si il y a eu des suppressions
-                        List<? extends Forme> liste = event.getRemoved();
-                        for(Forme forme : liste){
-                            Node toDelete = null;
-                            for(Node affiche : pane.getChildren()){     // On parcourt toutes les formes affichées
-                                if(affiche.getUserData() == forme) toDelete = affiche;  // Si la forme affichée correspond à la forme du modèle que l'on veut supprimer, on garde la vue de côté.
-                            }
-                            if(toDelete != null) pane.getChildren().remove(toDelete);   // Si on a trouvé la vue correspondant à la forme du modèle à supprimer, on la supprime.
-                        }
+                        if(toDelete != null) pane.getChildren().remove(toDelete);   // Si on a trouvé la vue correspondant à la forme du modèle à supprimer, on la supprime.
                     }
                 }
             }
@@ -383,7 +339,7 @@ public class ControleurDessin implements Initializable {
          * Initialise tous les événements liés à la vue de la forme.
          * @param view Vue à lier.
          */
-        public DnDToMoveShape(Shape view){
+        DnDToMoveShape(Shape view){
 
             view.setOnMousePressed(evt -> {     // Lorsque l'on clique sur une forme.
 

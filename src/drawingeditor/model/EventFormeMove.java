@@ -5,8 +5,8 @@ package drawingeditor.model;
  */
 public class EventFormeMove extends EventForme {
 
-    private double tx;
-    private double ty;
+    private final double tx;
+    private final double ty;
 
     /**
      * Sauvegarde le déplacement en X et Y de la forme.

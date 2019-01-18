@@ -12,11 +12,11 @@ import javafx.scene.paint.Paint;
  */
 public abstract class FormeImpl implements Forme {
 
-    protected ObjectProperty<Paint> couleurProperty;
-    protected DoubleProperty positionXProperty;
-    protected DoubleProperty positionYProperty;
-    protected DoubleProperty widthProperty;
-    protected DoubleProperty heightProperty;
+    private ObjectProperty<Paint> couleurProperty;
+    private DoubleProperty positionXProperty;
+    private DoubleProperty positionYProperty;
+    private DoubleProperty widthProperty;
+    private DoubleProperty heightProperty;
 
     /**
      * Initialise la forme.

@@ -5,8 +5,8 @@ package drawingeditor.model;
  */
 public class EventFormeResize extends EventForme {
 
-    private double rx;
-    private double ry;
+    private final double rx;
+    private final double ry;
 
     /**
      * Sauvegarde le changement de taille en X et Y.

@@ -20,7 +20,7 @@ import java.nio.file.Paths;
  */
 public class DessinImpl implements Dessin {
 
-    private ObservableList liste;
+    private ObservableList<Forme> liste;
     private ObjectProperty<Paint> bgProperty;
 
     /**
@@ -78,12 +78,12 @@ public class DessinImpl implements Dessin {
 
     @Override
     public String toCsv() {
-        String str = "";
-        str += "BgColor,"+this.bgProperty.getValue().toString()+"\n";   // Ajout de la couleur de fond dans le CSV.
+        StringBuilder str = new StringBuilder();
+        str.append("BgColor,").append(this.bgProperty.getValue().toString()).append("\n");   // Ajout de la couleur de fond dans le CSV.
         for(Object forme : this.liste){
-            str += ((Forme) forme).toCsv()+"\n";
+            str.append(((Forme) forme).toCsv()).append("\n");
         }
-        return str;
+        return str.toString();
     }
 
     @Override
@@ -138,10 +138,10 @@ public class DessinImpl implements Dessin {
     }
 
     public String toString(){
-        String str = "Size: "+this.liste.size()+"\n";
+        StringBuilder str = new StringBuilder("Size: " + this.liste.size() + "\n");
         for(Object forme : this.liste){
-            str += ((Forme) forme).toString()+"\n";
+            str.append(forme.toString()).append("\n");
         }
-        return str;
+        return str.toString();
     }
 }

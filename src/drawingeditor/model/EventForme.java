@@ -5,8 +5,8 @@ package drawingeditor.model;
  */
 public abstract class EventForme {
 
-    protected Forme forme;
-    protected Integer history;
+    protected final Forme forme;
+    private Integer history;
 
     /**
      * Initialise en sauvegardant la forme liée à l'événement et en lui attribuant un numéro d'historique nul.

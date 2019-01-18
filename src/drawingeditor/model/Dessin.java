@@ -45,19 +45,19 @@ public interface Dessin {
 	 * Retourne la couleur du fond du dessin.
 	 * @return Objet Paint du fond.
 	 */
-	public Paint getBg();
+	Paint getBg();
 
 	/**
 	 * Change la couleur du fond du dessin.
 	 * @param bg
 	 */
-	public void setBg(Paint bg);
+	void setBg(Paint bg);
 
 	/**
 	 * Retourne la propriété allant avec la couleur de fond.
 	 * @return
 	 */
-	public ObjectProperty<Paint> bgProperty();
+	ObjectProperty<Paint> bgProperty();
 
 	/**
 	 * Retourne une chaine correspondant à un format CSV du dessin.
