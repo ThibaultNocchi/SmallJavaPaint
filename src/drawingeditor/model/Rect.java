@@ -4,12 +4,21 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * Extension de FormeImpl pour un rectangle.
+ */
 public class Rect extends FormeImpl {
 
+    /**
+     * @see FormeImpl#FormeImpl(double, double, double, double, Paint)
+     */
     public Rect(double x, double y, double w, double h, Paint color){
         super(x,y,w,h,color);
     }
 
+    /**
+     * @see FormeImpl#FormeImpl(String)
+     */
     public Rect(String csv){ super(csv); }
 
     public String toString(){
@@ -55,6 +64,7 @@ public class Rect extends FormeImpl {
         return rect;
     }
 
+    @Override
     public String toCsv(){
         String str = "";
         str += "Rect,"+this.getPositionX()+","+this.getPositionY()+","+this.getWidth()+","+this.getHeight()+","+this.getCouleur().toString();

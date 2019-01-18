@@ -14,11 +14,18 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Implémentation de l'interface Dessin.
+ * @see drawingeditor.model.Dessin
+ */
 public class DessinImpl implements Dessin {
 
     private ObservableList liste;
     private ObjectProperty<Paint> bgProperty;
 
+    /**
+     * Initialise la liste de formes et met une couleur de fond par défaut.
+     */
     public DessinImpl(){
         this.liste = FXCollections.observableArrayList();
         this.bgProperty = new SimpleObjectProperty<>(Color.WHITE);
@@ -72,7 +79,7 @@ public class DessinImpl implements Dessin {
     @Override
     public String toCsv() {
         String str = "";
-        str += "BgColor,"+this.bgProperty.getValue().toString()+"\n";
+        str += "BgColor,"+this.bgProperty.getValue().toString()+"\n";   // Ajout de la couleur de fond dans le CSV.
         for(Object forme : this.liste){
             str += ((Forme) forme).toCsv()+"\n";
         }
@@ -112,11 +119,11 @@ public class DessinImpl implements Dessin {
     @Override
     public String save(String filename, double paneWidth, double paneHeight) throws FileNotFoundException {
         String newFilename = filename;
-        if(newFilename.equals("")) newFilename = "default.csv";
+        if(newFilename.equals("")) newFilename = "default.csv";     // Si il n'y a pas de nom de fichier spécifié, on en prend un par défaut.
         String[] splitFilename = newFilename.split("\\.");
-        if(splitFilename.length == 0 || !splitFilename[splitFilename.length-1].equals("csv")) newFilename += ".csv";
+        if(splitFilename.length == 0 || !splitFilename[splitFilename.length-1].equals("csv")) newFilename += ".csv";    // On regarde si une extension est spéficiée, si non, on l'ajoute.
         try (PrintWriter out = new PrintWriter(newFilename)) {
-            out.println("paneWidth,"+paneWidth);
+            out.println("paneWidth,"+paneWidth);    // Ajoute la taille du pane en début de fichier.
             out.println("paneHeight,"+paneHeight);
             out.println(this.toCsv());
         }

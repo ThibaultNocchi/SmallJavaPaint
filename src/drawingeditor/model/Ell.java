@@ -6,12 +6,21 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Shape;
 
+/**
+ * Extension de FormeImpl pour une ellipse.
+ */
 public class Ell extends FormeImpl {
-    
+
+    /**
+     * @see FormeImpl#FormeImpl(double, double, double, double, Paint)
+     */
     public Ell(double x, double y, double w, double h, Paint color) {
         super(x, y, w, h, color);
     }
 
+    /**
+     * @see FormeImpl#FormeImpl(String)
+     */
     public Ell(String csv){ super(csv); }
 
     public String toString(){
