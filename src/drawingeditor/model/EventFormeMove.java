@@ -1,10 +1,19 @@
 package drawingeditor.model;
 
+/**
+ * Événement correspondant au déplacement d'une forme.
+ */
 public class EventFormeMove extends EventForme {
 
     private double tx;
     private double ty;
 
+    /**
+     * Sauvegarde le déplacement en X et Y de la forme.
+     * @param tx Déplacement X.
+     * @param ty Déplacement Y.
+     * @see EventForme#EventForme(Forme)
+     */
     public EventFormeMove(double tx, double ty, Forme forme){
         super(forme);
         this.tx = tx;

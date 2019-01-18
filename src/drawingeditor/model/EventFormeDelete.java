@@ -1,7 +1,13 @@
 package drawingeditor.model;
 
+/**
+ * Événement correspondant à la suppression d'une forme.
+ */
 public class EventFormeDelete extends EventForme {
 
+    /**
+     * @see EventForme#EventForme(Forme)
+     */
     public EventFormeDelete(Forme removedForme){
         super(removedForme);
     }
